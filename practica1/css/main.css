@@ -1,0 +1,19 @@
+header {
+    background-color: rgba(110,33,33,1);
+    padding: 20px 20px;
+    
+    text-align: left;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial;
+    font-size: 50px;
+}
+
+.subheader{
+    float: right;
+    background-color: rgba(110,33,33,1);
+
+    font-size: 20px;
+}
+
+nav {
+    font-size: 15px;
+}
