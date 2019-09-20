@@ -1,19 +1,102 @@
-header {
-    background-color: rgba(110,33,33,1);
-    padding: 20px 20px;
-    
-    text-align: left;
-    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial;
-    font-size: 50px;
+html{
+	font-family: 'Roboto Slab', serif;
+	background-color: rgb(0, 0, 0);
+	color: rgb(255,255,255);
+}
+a{
+	color: rgb(13, 213, 228);
+}
+h1{
+	font-family: 'Exo 2', sans-serif;
+	margin: 0;
 }
 
-.subheader{
+/*Navbar settings*/
+
+.navbar {
+	overflow: hidden;
+	background-color: grey;
+	font-family: inherit;
+}
+
+.navbar a{
+	float: left;
+	font-size: 16px;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.navbar input{
+	float: right;
+	font-size: 13px;
+    color: rgba(203,196,196,1);
+    background-color: grey;
+	text-align: center;
+	padding: 14px 16px;
+    text-decoration: none;
+    border: 0;
+}
+
+.navbar button{
     float: right;
-    background-color: rgba(110,33,33,1);
-
-    font-size: 20px;
+    font-size: 16px;
+    background: url("../images/search.png");
+    padding: 14px 16px;
+    border: 0;
 }
 
-nav {
-    font-size: 15px;
+
+.active{
+	background-color: red;
+}
+
+/*Dropdown menus*/
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn{
+	font-size: 16px;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 14px 16px;
+	background-color: inherit;
+	font-family: inherit;
+	margin: 0;
+}
+
+.navbar a:hover,.navbar button:hover, .dropdown:hover .dropbtn {
+	background-color: red;
+}
+
+.dropdown-content {
+	display: none;
+    position: absolute;
+    margin-top: 45px; 
+	background-color: rgb(83, 81, 81);
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	float: none;
+	color: white;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+	background-color: rgb(37, 37, 37);
+}
+
+.dropdown:hover .dropdown-content{
+	display: block;
 }
