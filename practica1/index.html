@@ -8,32 +8,55 @@
     <title>PelisChulas.com</title>
 </head>
 <body>
-    <h1>Pelis Chulas</h1>
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <div class="dropdown">
-            <button class="dropbtn">Projects</button>
-            <div class="dropdown-content">
-                <a href="index.html">This webpage</a>
-                <a href="">Item2</a>
+    <!-- Main flex container -->
+    <div class="main">
+        <!-- Header with title and subtitle -->
+        <header>
+            <h1 id="header_title"> PelisChulas.com </h1>
+            <p id="header_subtitle"> Las pelis mas chulas de la interweb </p>
+        </header>
+
+        <!-- Navigation bar -->
+        <div class="navbar">
+            <!-- Home -->
+            <a class="butt_link" href="#">
+                Home
+            </a>
+
+            <!-- Display categories -->
+            <select name="Categories" id="butt_categories">
+                <option>Horror</option>
+                <option>Adventure</option>
+                <option>Comedy</option>
+                <option>Romance</option>
+            </select>
+
+            <!-- Account page -->
+            <a class="butt_link" href="#">
+                Anonymous
+            </a>
+
+            <input type="text" class="searchbar">
+        </div>
+        
+        <!-- Center of the page -->
+        <div class="center">
+            
+            <!-- Content of the page -->
+            <div class="content">
+                bbb
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                ccc
             </div>
         </div>
-        <a style="float: right;" href="Contact.html">Contact</a>
-        <input type="text" placeholder="Search"><br>
-        <button class="button"></button>
+        
+        <!-- Footer with copyright and other data -->
+        <footer>
+           Web licenced under the <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/">Creative commons</a>
+        </footer>
     </div>
-    <section>
-        <div class="sidebar">
-            <a>Login</a>
-        </div>
-    
-        <div class ="content">
-            
-        </div>
-    </section>
-    <footer>
-        Copyright: None ;)
-    </footer>
-    <p></p>
 </body>
 </html>
