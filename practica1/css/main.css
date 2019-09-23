@@ -28,7 +28,7 @@ h1{
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	height: 100%;
+	height: inherit;
 }
 
 .navbar input{
@@ -49,7 +49,7 @@ h1{
 	border: 0;
 	height: 50px;
 	width: 50px;
-	margin: 0;
+	margin-top: -20px;
 }
 
 
@@ -103,4 +103,36 @@ h1{
 
 .dropdown:hover .dropdown-content{
 	display: block;
+}
+
+section:after {
+	content: "";
+	display: table;
+	clear: both;
+  }
+
+.content{
+	width: 80%;
+	float: right;
+}
+
+/*Side Menu*/
+.sidebar {
+	float: left;
+	padding: 0;
+	width: 20%;
+	background-color: #f1f1f1;
+	height: 100%;
+	overflow: auto;
+}
+
+.sidebar a {
+	display: block;
+	color: black;
+	padding: 16px;
+	text-decoration: none;
+}
+
+.sidebar a:hover{
+	background-color: red;
 }
