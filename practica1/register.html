@@ -15,7 +15,7 @@
                 <img src="images/logo.svg" alt="Jolly Rogers" id="header-logo">
 
                 <div class="header-bunch">
-                    <h1 id="header-title">PelisChulas.com</h1>
+                    <h1 class="register-label" id="header-title">PelisChulas.com</h1>
                     <p id="header-subtitle">Las pelis mas chulas de la interweb</p>
                 </div>
             </a>
@@ -139,49 +139,47 @@
 
             <!-- Content of the page -->
             <div class="content">
-                <div class="movie-list">
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 1</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 2</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 3</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 4</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 5</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 6</h4>
-                        </a>
-                    </div>
-                    <div class="movie">
-                        <a href="movie_det.html">
-                            <img src="images/movie.jpg" alt="Piratas del caribe">
-                            <h4>Title Of The Movie 7</h4>
-                        </a>
-                    </div>
+                <div class="content-margin">
+                    <form action="index.html">
+                        <label for="username"><p class="register-label">Username:</p></label>
+                        <input type="text" placeholder="Username" name="username" required>
+
+                        <fieldset class="conf-method">
+                            <legend>Confirmation method</legend>
+                            <input class="rad" type="radio" name="confirmation">Email confirmation<br>
+                            <input class="rad2" type="radio" name="confirmation">Phone confirmation
+
+                            <br><br>
+                            <div class="email">
+                                <label for="email"><p class="register-label">Email:</p></label>
+                                <input type="text" placeholder="Enter Email" name="email">
+                            </div>
+
+                            <br>
+                            <div class="phone">
+                                <label for="phone"><p class="register-label">Phone:</p></label>
+                                <input type="number" min="600000000" max="799999999" placeholder="Enter phone" name="phone">
+                            </div>
+                        </fieldset>
+
+                        <label for="password"><p class="register-label">Password:</p></label>
+                        <input type="password" placeholder="Enter Password" name="password">
+
+                        <br><br>
+                        <label for="card-type"><p class="register-label">Credit card type:</p></label>
+                        <select name="card-type">
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="paypal">Paypal</option>
+                        </select>
+
+                        <br><br>
+                        <label for="card"><p class="register-label">Credit card:</p></label>
+                        <input type="text" placeholder="Enter credit card" name="card">
+
+                        <br><br>
+                        <button type="index.html">Submit</button>
+                    </form>
                 </div>
             </div>
 
