@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <title>PelisChulas.com</title>
 </head>
 
@@ -11,8 +11,8 @@
     <!-- Header with title and subtitle -->
     <header>
         <div class="header-link-div">
-            <a href="index.html" id="header-link">
-                <img src="images/logo.svg" alt="Jolly Rogers" id="header-logo">
+            <a href="../index.html" id="header-link">
+                <img src="../images/logo.svg" alt="Jolly Rogers" id="header-logo">
 
                 <div class="header-bunch">
                     <h1 class="register-label" id="header-title">PelisChulas.com</h1>
@@ -25,9 +25,9 @@
         <div class="navbar">
             <!-- Home -->
             <div class="nav-element">
-                <a class="butt_link" href="index.html">
+                <a class="butt_link" href="../index.html">
                     <div class=butt>
-                        <img src="images/home.svg" alt="Home icon">
+                        <img src="../images/home.svg" alt="Home icon">
                         <div class="sepparator"></div>
                         <p>Home</p>
                     </div>
@@ -39,7 +39,7 @@
                 <div class="nav-element-menu">
                     <a class="butt_link_menu" href="#">
                         <div class=butt>
-                            <img src="images/tag.svg" alt="Home icon">
+                            <img src="../images/tag.svg" alt="Home icon">
                             <div class="sepparator"></div>
                             <p>Categories</p>
                         </div>
@@ -49,7 +49,7 @@
                     <div class="nav-element">
                         <a class="butt_link" href="#">
                             <div class=butt>
-                                <img src="images/moon.svg" alt="User icon">
+                                <img src="../images/moon.svg" alt="User icon">
                                 <div class="sepparator"></div>
                                 <p>Horror</p>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="nav-element">
                         <a class="butt_link" href="#">
                             <div class=butt>
-                                <img src="images/heart.svg" alt="User icon">
+                                <img src="../images/heart.svg" alt="User icon">
                                 <div class="sepparator"></div>
                                 <p>Romance</p>
                             </div>
@@ -67,7 +67,7 @@
                     <div class="nav-element">
                         <a class="butt_link" href="#">
                             <div class=butt>
-                                <img src="images/smile.svg" alt="User icon">
+                                <img src="../images/smile.svg" alt="User icon">
                                 <div class="sepparator"></div>
                                 <p>Comedy</p>
                             </div>
@@ -83,7 +83,7 @@
                 <div class="nav-element">
                     <a class="butt_link" href="#">
                         <div class=butt>
-                            <img src="images/user.svg" alt="User icon">
+                            <img src="../images/user.svg" alt="User icon">
                             <div class="sepparator"></div>
                             <p>Guest</p>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="nav-element">
                         <a class="butt_link" href="#">
                             <div class=butt>
-                                <img src="images/user.svg" alt="User icon">
+                                <img src="../images/user.svg" alt="User icon">
                                 <div class="sepparator"></div>
                                 <p>Log In</p>
                             </div>
@@ -102,7 +102,7 @@
                     <div class="nav-element">
                         <a class="butt_link" href="register.html">
                             <div class=butt>
-                                <img src="images/user.svg" alt="User icon">
+                                <img src="../images/user.svg" alt="User icon">
                                 <div class="sepparator"></div>
                                 <p>Register</p>
                             </div>
@@ -114,7 +114,7 @@
             <!-- Search bar -->
             <div class="nav-element">
                 <div class=butt>
-                    <img src="images/search.svg" alt="Search icon">
+                    <img src="../images/search.svg" alt="Search icon">
                     <div class="sepparator"></div>
                     <input type="text" class="searchbar">
                 </div>
@@ -124,7 +124,7 @@
             <div class="nav-element">
                 <a class="butt_link" href="#">
                     <div class=butt>
-                        <img src="images/shopping-cart.svg" alt="Cart icon">
+                        <img src="../images/shopping-cart.svg" alt="Cart icon">
                         <div class="sepparator"></div>
                         <p>Cart</p>
                     </div>
@@ -152,7 +152,7 @@
                             <br><br>
                             <div class="email">
                                 <label for="email"><p class="register-label">Email:</p></label>
-                                <input type="text" placeholder="Enter Email" name="email">
+                                <input type="email" placeholder="Enter Email" name="email">
                             </div>
 
                             <br>
@@ -176,6 +176,11 @@
                         <br><br>
                         <label for="card"><p class="register-label">Credit card:</p></label>
                         <input type="text" placeholder="Enter credit card" name="card">
+                        
+                        <br><br>
+                        <label for="card-expiration"><p class="register-label">Expiration Date:</p></label>
+                        <input type="number" min="1" max="12" placeholder="Month" name="card_month">
+                        <input type="number" min="2019" max="2050" placeholder="Year" name="card_year">
 
                         <br><br>
                         <button type="index.html">Submit</button>
