@@ -35,3 +35,15 @@ Autores: Pablo Sánchez Redondo y Antonio Solana Vera
 
 
 ## Resultados y evidencias del trabajo realizado
+
+Indice:
+![index](indexpic.png)
+
+Indice logueado:
+![index_logged](loggedpic.png)
+
+Forma de registro:
+![register](registerpic.png)
+
+Detalle de la película:
+![movie_det](moviedetpic.png)
