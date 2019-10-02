@@ -8,7 +8,7 @@ Autores: Pablo Sánchez Redondo y Antonio Solana Vera
 
 ## Diagramas de la web
 
-![Diagrama](Insertar aqui el draw.io)
+![Diagrama](EsquemaWeb.png)
 
 * Header: acessible desde todos lados, contiene el logo y formas para volver a la página de inicio, además de una barra de busqueda que te lleva a la de resultados. También proporciona acceso al carrito.
 
