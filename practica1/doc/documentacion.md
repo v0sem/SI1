@@ -10,6 +10,14 @@ Autores: Pablo Sánchez Redondo y Antonio Solana Vera
 
 ![Diagrama](Insertar aqui el draw.io)
 
+* Header: acessible desde todos lados, contiene el logo y formas para volver a la página de inicio, además de una barra de busqueda que te lleva a la de resultados. También proporciona acceso al carrito.
+
+* Sidebar: Zona de usuarios. Login y registro para los invitados y acceso al historial y cerrar sesion para los que se logueen.
+
+* Footer: Información básica de la página web.
+
+* Contenido: Zona donde se muestra el contenido de el frame actual. Ya sean resultados, el carrito o la forma de registro por ejemplo.
+
 ## Descripción de los archivos de entrega
 
 1. index.html: Fichero inicial o pagina de inicio. Es la pagina de inicio de los usuarios no logueados.
