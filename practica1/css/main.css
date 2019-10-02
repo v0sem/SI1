@@ -16,7 +16,7 @@ header {
     border: 2px solid white;
 }
 
-.center {
+.main {
     display: flex;
     flex-direction: row;
     margin-top: 1em;
@@ -42,12 +42,15 @@ header {
     border: 2px solid white;
 }
 
-.sidebar input, .sidebar p, .sidebar h3 {
+.sidebar input,
+.sidebar p,
+.sidebar h3 {
     margin-left: 10px;
     margin-top: 10px;
 }
 
-.sidebar a, .sidebar button {
+.sidebar a,
+.sidebar button {
     border: 2px solid white;
     padding: 14px 16px;
     background-color: black;
@@ -111,7 +114,8 @@ header a:visited {
     background-color: #888888;
 }
 
-button, select {
+button,
+select {
     color: white;
 }
 

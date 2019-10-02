@@ -98,65 +98,61 @@
             </div>
         </div>
     </header>
-    <!-- Main flex container -->
     <div class="main">
-        <!-- Center of the page -->
-        <div class="center">
 
-            <!-- Content of the page -->
-            <div class="content">
-                <div class="content-margin">
-                    <form action="index.html">
-                        <label for="username"><p class="register-label">Username:</p></label>
-                        <input type="text" placeholder="Username" name="username" required>
+        <!-- Content of the page -->
+        <div class="content">
+            <div class="content-margin">
+                <form action="index.html">
+                    <label for="username">Username:<br/></label>
+                    <input type="text" placeholder="Username" id="username" required>
 
-                        <fieldset class="conf-method">
-                            <legend>Confirmation method</legend>
-                            <input class="rad" type="radio" name="confirmation">Email confirmation<br>
-                            <input class="rad2" type="radio" name="confirmation">Phone confirmation
-
-                            <br><br>
-                            <div class="email">
-                                <label for="email"><p class="register-label">Email:</p></label>
-                                <input type="email" placeholder="Enter Email" name="email">
-                            </div>
-
-                            <br>
-                            <div class="phone">
-                                <label for="phone"><p class="register-label">Phone:</p></label>
-                                <input type="number" min="600000000" max="799999999" placeholder="Enter phone" name="phone">
-                            </div>
-                        </fieldset>
-
-                        <label for="password"><p class="register-label">Password:</p></label>
-                        <input type="password" placeholder="Enter Password" name="password">
+                    <fieldset class="conf-method">
+                        <legend>Confirmation method</legend>
+                        <input class="rad" type="radio" name="confirmation">Email confirmation<br>
+                        <input class="rad2" type="radio" name="confirmation">Phone confirmation
 
                         <br><br>
-                        <label for="card-type"><p class="register-label">Credit card type:</p></label>
-                        <select name="card-type">
+                        <div class="email">
+                            <label for="email">Email:<br/></label>
+                            <input type="email" placeholder="Enter Email" id="email">
+                        </div>
+
+                        <br>
+                        <div class="phone">
+                            <label for="phone">Phone:<br/></label>
+                            <input type="number" min="600000000" max="799999999" placeholder="Enter phone" id="phone">
+                        </div>
+                    </fieldset>
+
+                    <label for="password">Password:<br/></label>
+                    <input type="password" placeholder="Enter Password" id="password">
+
+                    <br><br>
+                    <label for="card-type">Credit card type:<br/></label>
+                    <select id="card-type">
                             <option value="visa">Visa</option>
                             <option value="mastercard">Mastercard</option>
                             <option value="paypal">Paypal</option>
                         </select>
 
-                        <br><br>
-                        <label for="card"><p class="register-label">Credit card:</p></label>
-                        <input type="text" placeholder="Enter credit card" name="card">
-                        
-                        <br><br>
-                        <label for="card-expiration"><p class="register-label">Expiration Date:</p></label>
-                        <input type="number" min="1" max="12" placeholder="Month" name="card_month">
-                        <input type="number" min="2019" max="2050" placeholder="Year" name="card_year">
+                    <br><br>
+                    <label for="card">Credit card:<br/></label>
+                    <input type="text" placeholder="Enter credit card" id="card">
 
-                        <br><br>
-                        <button type="index.html">Submit</button>
-                    </form>
-                </div>
-            </div>
+                    <br><br>
+                    <label for="card_year">Expiration Date:<br/></label>
+                    <input type="number" min="1" max="12" placeholder="Month" name="card_month">
+                    <input type="number" min="2019" max="2050" placeholder="Year" id="card_year">
 
-            <!-- Sidebar -->
-            <div class="sidebar">
+                    <br><br>
+                    <button type="submit" value="submit">Submit</button>
+                </form>
             </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
         </div>
     </div>
 
