@@ -153,19 +153,17 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <h3>Hello: Guest</h3>
-                <form action="frames/index_logged.html">
-                    <label for="username"><p class="register-label">Username:</p></label>
-                    <input type="text" placeholder="Username" name="username" required>
+                <form id="regform" action="frames/index_logged.html">
+                    <label for="username" class="register-label">Username:<br/></label>
+                    <input type="text" placeholder="Username" name="username" id="username" required>
+                    <br/><br/>
+                    <label for="password" class="register-label">Password:<br/></label>
+                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
-                    <label for="password"><p class="register-label">Password:</p></label>
-                    <input type="password" placeholder="Enter Password" name="password">
-
-                    <br><br>
-                    <button type="frames/index_logged.html">Submit</button>
+                    <br/><br/>
                 </form>
 
-                
-                <br><br><br>
+                <button type="submit" form='regform'>Submit</button>
                 <a href="frames/register.html">Register</a>
             </div>
         </div>

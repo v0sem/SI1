@@ -23,11 +23,11 @@ Autores: Pablo Sánchez Redondo y Antonio Solana Vera
 1. index.html: Fichero inicial o pagina de inicio. Es la pagina de inicio de los usuarios no logueados.
 
 1. docs:
-   
+
    * Este documento
 
 1. css:
-   
+
     * main.css: Documento de estilos css
 
 1. frames:
