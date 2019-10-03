@@ -74,6 +74,8 @@ La página se divide en 3 partes: un header arriba, un footer abajo y un div con
 
 En general hemos decidido usar flex para casi todos los elementos de la web. Esta nos ha parecido la solución más fácil y limpia. Utilizando flex-direction para cambiar de horizontal a vertical la ordenación de los divs hijo nos las hemos arreglado para que todo quede colocado en su lugar. También haciendo uso de flex-wrap hemos conseguido que las películas se adapten a la pantalla.
 
+<div style="page-break-after: always;"></div>
+
 ## Resultados y evidencias del trabajo realizado
 
 Indice:
