@@ -45,10 +45,10 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        user_path = request.form.get('username', '', type=str)
+        user_path = 'usuarios/' + str(request.form.get('username'))
         try:
             os.mkdir(user_path)
-            f = open(user_path, "w")
+            f = open(user_path + '/datos.dat', "w")
             f.write(request.form.get('username'))
             f.write(md5(request.form.get('password').encode()))
             return redirect(url_for('index'))
