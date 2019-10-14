@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+    <div class="movie-list">
+        {% for movie in movies %}
+        <div class="movie">
+            <a href="frames/movie_det.html">
+                <img src={{ url_for('static', filename='images/movie' + movie.id|string + '.jpg' )}} alt="Piratas del caribe">
+                <h4>{{ movie.titulo }}</h4>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
