@@ -106,6 +106,7 @@
         <div class="sidebar">
             {% if user %}
                 <h3>Hello: {{ user }}</h3>
+                <br/>
                 <a href="{{ url_for('logout') }}">Log Out</a>
             {% else %}
             <h3>Hello: Guest</h3>
