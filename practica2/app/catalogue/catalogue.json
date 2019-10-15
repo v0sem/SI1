@@ -2,12 +2,12 @@
   [ 
     { 
 			"id": 1,
-			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
+			"titulo": "Avatar",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
       "precio": 18.99,
       "categoria": "Aventura",
-      "año": 1999,
+      "año": 2000,
       "actores": 
       [
         { "nombre": "Jake Lloyd",
@@ -18,12 +18,60 @@
     },
     { 
 			"id": 1,
-			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
+			"titulo": "Kill Bill",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
       "precio": 16.99,
-      "categoria": "Aventura",
-      "año": 1999,
+      "categoria": "Horror",
+      "año": 2003,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 1,
+			"titulo": "Hateful Eight",
+      "poster": "imagenes/guerraepisodio1.jpg",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Comedia",
+      "año": 2014,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 1,
+			"titulo": "Seven Samurai",
+      "poster": "imagenes/guerraepisodio1.jpg",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Romance",
+      "año": 2008,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 1,
+			"titulo": "Jojimbo",
+      "poster": "imagenes/guerraepisodio1.jpg",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Romance",
+      "año": 2019,
       "actores": 
       [
         { "nombre": "Jake Lloyd",
@@ -38,56 +86,8 @@
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
       "precio": 18.99,
-      "categoria": "Aventura",
-      "año": 1999,
-      "actores": 
-      [
-        { "nombre": "Jake Lloyd",
-          "personaje": "Anakin Skywalker",
-          "foto": "imagenes/anakin.jpg"
-        }
-      ]
-    },
-    { 
-			"id": 1,
-			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
-      "poster": "imagenes/guerraepisodio1.jpg",
-      "director": "George Lucas",
-      "precio": 18.99,
-      "categoria": "Aventura",
-      "año": 1999,
-      "actores": 
-      [
-        { "nombre": "Jake Lloyd",
-          "personaje": "Anakin Skywalker",
-          "foto": "imagenes/anakin.jpg"
-        }
-      ]
-    },
-    { 
-			"id": 1,
-			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
-      "poster": "imagenes/guerraepisodio1.jpg",
-      "director": "George Lucas",
-      "precio": 18.99,
-      "categoria": "Aventura",
-      "año": 1999,
-      "actores": 
-      [
-        { "nombre": "Jake Lloyd",
-          "personaje": "Anakin Skywalker",
-          "foto": "imagenes/anakin.jpg"
-        }
-      ]
-    },
-    { 
-			"id": 1,
-			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
-      "poster": "imagenes/guerraepisodio1.jpg",
-      "director": "George Lucas",
-      "precio": 18.99,
-      "categoria": "Aventura",
-      "año": 1999,
+      "categoria": "Comedia",
+      "año": 1979,
       "actores": 
       [
         { "nombre": "Jake Lloyd",

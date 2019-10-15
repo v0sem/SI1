@@ -47,31 +47,40 @@
                 </div>
                 <div id="dropdown">
                     <div class="nav-element">
-                        <a class="butt_link" href="#">
-                            <div class=butt>
-                                <img src={{ url_for('static', filename='images/moon.svg') }} alt="User icon">
-                                <div class="sepparator"></div>
-                                <p>Horror</p>
-                            </div>
-                        </a>
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Horror">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/moon.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Horror</p>
+                                </div>
+                            </button>
+                        </form>
                     </div>
                     <div class="nav-element">
-                        <a class="butt_link" href="#">
-                            <div class=butt>
-                                <img src={{ url_for('static', filename='images/heart.svg') }} alt="User icon">
-                                <div class="sepparator"></div>
-                                <p>Romance</p>
-                            </div>
-                        </a>
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Romance">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/heart.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Romance</p>
+                                </div>
+                            </button>
+                        </form>
                     </div>
                     <div class="nav-element">
-                        <a class="butt_link" href="#">
-                            <div class=butt>
-                                <img src={{ url_for('static', filename='images/smile.svg') }} alt="User icon">
-                                <div class="sepparator"></div>
-                                <p>Comedy</p>
-                            </div>
-                        </a>
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Comedia">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/smile.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Comedy</p>
+                                </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,7 +90,10 @@
                 <div class=butt>
                     <img src={{ url_for('static', filename='images/search.svg') }} alt="Search icon">
                     <div class="sepparator"></div>
-                    <input type="text" class="searchbar">
+                    <form action="/search" method="post" novalidate>
+                        <input name="search_content" type="text" class="searchbar">
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
             </div>
 

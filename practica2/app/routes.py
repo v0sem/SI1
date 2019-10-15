@@ -21,6 +21,39 @@ def index():
     else:
         return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
 
+@app.route('/search', methods=['POST'])
+def search():
+    print (url_for('static', filename='estilo.css'), file=sys.stderr)
+    catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
+    catalogue = json.loads(catalogue_data)
+
+    # Get movies with search
+    results = []
+    for movie in catalogue['peliculas']:
+        if request.form.get('search_content') in movie['titulo']:
+            results.append(movie)
+            
+    if 'usuario' in session:
+        return render_template('search.html', title = "Search results", movies=results, user=session['usuario'])
+    else:
+        return render_template('search.html', title = "Search results", movies=results)
+
+@app.route('/category', methods=['POST'])
+def category():
+    print (url_for('static', filename='estilo.css'), file=sys.stderr)
+    catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
+    catalogue = json.loads(catalogue_data)
+
+    # Get movies with search
+    results = []
+    for movie in catalogue['peliculas']:
+        if request.form.get('category') == movie['categoria']:
+            results.append(movie)
+            
+    if 'usuario' in session:
+        return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results, user=session['usuario'])
+    else:
+        return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -50,6 +83,7 @@ def register():
     if request.method == 'POST':
         user_path = 'usuarios/' + str(request.form.get('username'))
         try:
+            os.mkdir("NEPE")
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
             f.write(str(request.form.get('username')) + '\n')
