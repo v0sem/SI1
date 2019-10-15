@@ -2,45 +2,48 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, request, url_for, redirect, session
+from flask import render_template, request, url_for, redirect, session, flash
 import json
 import os
 import sys
 from hashlib import md5
+import random
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     print (url_for('static', filename='estilo.css'), file=sys.stderr)
     catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
     catalogue = json.loads(catalogue_data)
-    return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    # doc sobre request object en http://flask.pocoo.org/docs/1.0/api/#incoming-request-data
-    if 'username' in request.form:
-        # aqui se deberia validar con fichero .dat del usuario
-        if request.form['username'] == 'pp':
-            session['usuario'] = request.form['username']
-            session.modified=True
-            # se puede usar request.referrer para volver a la pagina desde la que se hizo login
-            return redirect(url_for('index'))
-        else:
-            # aqui se le puede pasar como argumento un mensaje de login invalido
-            return render_template('login.html', title = "Sign In")
+    if 'usuario' in session:
+        return render_template('index.html', title = "Home", movies=catalogue['peliculas'], user=session['usuario'])
     else:
-        # se puede guardar la pagina desde la que se invoca 
-        session['url_origen']=request.referrer
-        session.modified=True        
-        # print a error.log de Apache si se ejecuta bajo mod_wsgi
-        print (request.referrer, file=sys.stderr)
-        return render_template('login.html', title = "Sign In")
+        return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    for dirs in os.listdir('usuarios/'):
+        if str(request.form.get('username')) == dirs:
+            f = open('usuarios/' + dirs + '/datos.dat')
+            valuser = f.readline()
+            valpass = f.readline()
+            f.close()
+            valpass = valpass.strip()
+            if md5(str(request.form.get('password')).encode()).hexdigest() == valpass:
+                session['usuario'] = valuser
+                session.modified=True
+            break
+
+    return redirect(url_for('index'))
+
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.pop('usuario', None)
     return redirect(url_for('index'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -49,10 +52,16 @@ def register():
         try:
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
-            f.write(request.form.get('username'))
-            f.write(md5(request.form.get('password').encode()))
+            f.write(str(request.form.get('username')) + '\n')
+            f.write(md5(str(request.form.get('password')).encode()).hexdigest() + '\n')
+            f.write(str(request.form.get('email')) + '\n')
+            f.write(str(request.form.get('ccnumber')) + '\n')
+            f.write(str(random.randint(0,100)))
+            f.close()
             return redirect(url_for('index'))
         except FileExistsError:
             print (request.referrer, file=sys.stderr)
+            flash('Name is already taken')
             session.modified=True
+            return redirect(url_for('register'))
     return render_template('register.html', title="Register")

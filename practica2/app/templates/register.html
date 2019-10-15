@@ -5,27 +5,22 @@
 {% endblock %}
 
 {% block content %}
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
     <div class="content-margin">
         <form action="{{ url_for('register') }}" method="POST">
             <label for="username">Username:<br/></label>
             <input type="text" placeholder="Username" id="username" name="username" required>
-            <fieldset class="conf-method">
-                <legend>Confirmation method</legend>
-                <input class="rad" type="radio" name="confirmation">Email confirmation<br>
-                <input class="rad2" type="radio" name="confirmation">Phone confirmation
-                <br><br>
-                <div class="email">
-                    <label for="email">Email:<br/></label>
-                    <input type="email" placeholder="Enter Email" id="email">
-                </div>
-                <br>
-                <div class="phone">
-                    <label for="phone">Phone:<br/></label>
-                    <input type="number" min="600000000" max="799999999" placeholder="Enter phone" id="phone">
-                </div>
-            </fieldset>
+            <br/><br/>
+            <label for="email">Email:<br/></label>
+            <input type="email" placeholder="Enter Email" id="email" name="email" required>
+            <br/><br/>
+            <label for="phone">Phone:<br/></label>
+            <input type="number" min="600000000" max="799999999" placeholder="Enter phone" id="phone">
+            <br/><br/>
             <label for="password">Password:<br/></label>
-            <input type="password" placeholder="Enter Password" id="password" required>
+            <input type="password" placeholder="Enter Password" id="password" name="password" required>
             <br><br>
             <label for="card-type">Credit card type:<br/></label>
             <select id="card-type">
@@ -35,7 +30,7 @@
                 </select>
             <br><br>
             <label for="card">Credit card:<br/></label>
-            <input type="text" placeholder="Enter credit card" id="card">
+            <input type="text" placeholder="Enter credit card" id="card" name="ccnumber"required>
             <br><br>
             <label for="card_year">Expiration Date:<br/></label>
             <input type="number" min="1" max="12" placeholder="Month" name="card_month">

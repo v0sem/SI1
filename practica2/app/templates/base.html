@@ -104,8 +104,12 @@
         </div>
         <!-- Sidebar -->
         <div class="sidebar">
+            {% if user %}
+                <h3>Hello: {{ user }}</h3>
+                <a href="{{ url_for('logout') }}">Log Out</a>
+            {% else %}
             <h3>Hello: Guest</h3>
-            <form id="regform" action="frames/index_logged.html">
+            <form id="regform" action="{{ url_for('login') }}" method="POST">
                 <label for="username" class="register-label">Username:<br/></label>
                 <input type="text" placeholder="Username" name="username" id="username" required>
                 <br/><br/>
@@ -117,6 +121,7 @@
 
             <button type="submit" form='regform'>Submit</button>
             <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
         </div>
     </div>
 
