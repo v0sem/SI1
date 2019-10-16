@@ -16,10 +16,8 @@ def index():
     catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
     catalogue = json.loads(catalogue_data)
 
-    if 'usuario' in session:
-        return render_template('index.html', title = "Home", movies=catalogue['peliculas'], user=session['usuario'])
-    else:
-        return render_template('index.html', title = "Home", movies=catalogue['peliculas'])
+    return render_template('index.html', title = "Home", movies=catalogue['peliculas'], user=session.get('usuario'))
+
 
 
 @app.route('/login', methods=['POST'])
@@ -32,7 +30,7 @@ def login():
             f.close()
             valpass = valpass.strip()
             if md5(str(request.form.get('password')).encode()).hexdigest() == valpass:
-                session['usuario'] = valuser
+                session['usuario'] = valuser.strip()
                 session.modified=True
             break
 

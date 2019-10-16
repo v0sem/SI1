@@ -1,3 +1,5 @@
 {
-    "markdown-pdf.includeDefaultStyles": false
+    "markdown-pdf.includeDefaultStyles": false,
+    "python.pythonPath": "/home/vosem/Code/virtualenvs/si1pyenv/bin/python",
+    "python.linting.enabled": true
 }
