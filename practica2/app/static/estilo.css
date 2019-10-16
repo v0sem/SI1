@@ -228,6 +228,9 @@ select {
 .butt_link {
     margin: auto;
     text-decoration: none;
+    background: none!important;
+    border: none;
+    padding: 0!important;
 }
 
 select {
@@ -236,4 +239,8 @@ select {
 
 .conf-method {
     margin: 1em 0 1em 0;
+}
+
+.result-title {
+    margin-left: 16px;
 }
