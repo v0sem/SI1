@@ -5,7 +5,7 @@
 			"titulo": "Avatar",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 18.99,
+      "precio": 1877.99,
       "categoria": "Aventura",
       "año": 2000,
       "actores": 
@@ -21,11 +21,11 @@
       ]
     },
     { 
-			"id": 1,
+			"id": 2,
 			"titulo": "Kill Bill",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 16.99,
+      "precio": 156.99,
       "categoria": "Horror",
       "año": 2003,
       "actores": 
@@ -37,11 +37,11 @@
       ]
     },
     { 
-			"id": 1,
+			"id": 3,
 			"titulo": "Hateful Eight",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 18.99,
+      "precio": 138.99,
       "categoria": "Comedia",
       "año": 2014,
       "actores": 
@@ -53,11 +53,11 @@
       ]
     },
     { 
-			"id": 1,
+			"id": 4,
 			"titulo": "Seven Samurai",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 18.99,
+      "precio": 118.99,
       "categoria": "Romance",
       "año": 2008,
       "actores": 
@@ -69,7 +69,7 @@
       ]
     },
     { 
-			"id": 1,
+			"id": 5,
 			"titulo": "Jojimbo",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
@@ -85,11 +85,11 @@
       ]
     },
     { 
-			"id": 1,
+			"id": 6,
 			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 18.99,
+      "precio": 28.99,
       "categoria": "Comedia",
       "año": 1979,
       "actores": 

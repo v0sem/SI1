@@ -112,3 +112,31 @@ def register():
             session.modified=True
             return redirect(url_for('register'))
     return render_template('register.html', title="Register")
+
+@app.route('/add_cart', methods=['POST'])
+def add_cart():
+    catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
+    catalogue = json.loads(catalogue_data)
+                
+    pelicula = request.form.get('id')
+
+    result = None
+    for movie in catalogue['peliculas']:
+        print(str(movie['id']) + ' > ' + str(pelicula))
+        if int(movie['id']) == int(pelicula):
+            result = movie
+            break
+
+    try:
+        session['cart'].append(result)
+    except:
+        session['cart'] = []
+        session['cart'].append(result)
+    
+    session.modified = True
+
+    return redirect(url_for('index'))
+
+@app.route('/get_cart', methods=['GET'])
+def get_cart():
+    return str(session['cart'])

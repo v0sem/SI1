@@ -15,5 +15,12 @@
                 - {{ actor.nombre }} como "{{ actor.personaje }}"<br/>
             {% endfor %}
         </p>
+
+        <form action="/add_cart" method="post" novalidate>
+            <button type="submit" class="black_white_button">
+                <input type="hidden" name="id" value="{{ movie.id }}">
+                <div class=butt>Meter en carrito</div>
+            </button>
+        </form>
     </div>
 {% endblock %}
