@@ -248,3 +248,7 @@ select {
 .details {
     margin-left: 16px;
 }
+
+.black_white_button {
+    color: black;
+}
