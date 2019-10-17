@@ -5,4 +5,18 @@
 {% endblock %}
 
 {% block content %}
+    <div class="movie-list">
+        {% for movie in movies %}
+        <div class="item-carrito">
+            {{ movie.titulo }} - {{ movie.coste }}
+        </div><br />
+        {% endfor %}
+    </div>
+    <form action="{{ url_for('buy')}}" method="POST">
+        {% if user %}
+            <input class="butt_link" type="submit" value="Comprar">
+        {% else %}
+            <p>Not logged in, to buy movies please Login or <a href="{{ url_for('register') }}">Register</a></p>
+    </form>
+          
 {% endblock %}

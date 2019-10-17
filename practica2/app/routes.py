@@ -28,7 +28,7 @@ def search():
     # Get movies with search
     results = []
     for movie in catalogue['peliculas']:
-        if request.form.get('search_content') in movie['titulo']:
+        if request.form.get('search_content').lower() in movie['titulo'].lower():
             results.append(movie)
             
     return render_template('search.html', title = "Search results", movies=results, user=session.get('usuario'))
@@ -54,19 +54,16 @@ def details():
     catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
     catalogue = json.loads(catalogue_data)
 
-    title = request.form.get('title')
+    id = request.form.get('id')
 
     movie = None
     for m in catalogue['peliculas']:
-        print(title + " = " + m['titulo'])
-        if m['titulo'] == title:
+        if m['id'] == id:
             movie = m
+            break
 
+    return render_template('movie_det.html', title=m.get('titulo'), movie=movie, user=session.get('usuario'))
 
-    if 'usuario' in session:
-        return render_template('movie_det.html', title=title, movie=movie, user=session['usuario'])
-    else:
-        return render_template('movie_det.html', title=title, movie=movie)
 
 @app.route('/login', methods=['POST'])
 def login():
