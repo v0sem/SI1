@@ -147,7 +147,7 @@ select {
     flex-wrap: wrap;
 }
 
-.movie a {
+.movie button, .movie a {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -242,5 +242,9 @@ select {
 }
 
 .result-title {
+    margin-left: 16px;
+}
+
+.details {
     margin-left: 16px;
 }

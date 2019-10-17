@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+    <div class="details">
+        <h1>{{ movie.id }}. {{ movie.titulo }}</h1>
+        <h2>By {{ movie.director }}</h2>
+        <p>Esta pelicula, clasificada por muchos como {{ movie.categoria }}, aparecio en los cines en el año {{ movie.año }}.
+            Tiene por protagonistas a:
+        </p>
+            {% for actor in movie.actores %}
+                - {{ actor.nombre }} como "{{ actor.personaje }}"<br/>
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}

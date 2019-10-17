@@ -13,6 +13,10 @@
         { "nombre": "Jake Lloyd",
           "personaje": "Anakin Skywalker",
           "foto": "imagenes/anakin.jpg"
+        },
+        { "nombre": "Antonio Solana",
+          "personaje": "El chico azul ese",
+          "foto": "imagenes/anakin.jpg"
         }
       ]
     },

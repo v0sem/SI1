@@ -47,7 +47,27 @@ def category():
             
     return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results, user=session.get('usuario'))
     
-    
+
+@app.route('/movie_det', methods=['POST'])
+def details():
+    print (url_for('static', filename='estilo.css'), file=sys.stderr)
+    catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
+    catalogue = json.loads(catalogue_data)
+
+    title = request.form.get('title')
+
+    movie = None
+    for m in catalogue['peliculas']:
+        print(title + " = " + m['titulo'])
+        if m['titulo'] == title:
+            movie = m
+
+
+    if 'usuario' in session:
+        return render_template('movie_det.html', title=title, movie=movie, user=session['usuario'])
+    else:
+        return render_template('movie_det.html', title=title, movie=movie)
+
 @app.route('/login', methods=['POST'])
 def login():
     for dirs in os.listdir('usuarios/'):
