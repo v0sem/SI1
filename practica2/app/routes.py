@@ -31,10 +31,7 @@ def search():
         if request.form.get('search_content') in movie['titulo']:
             results.append(movie)
             
-    if 'usuario' in session:
-        return render_template('search.html', title = "Search results", movies=results, user=session['usuario'])
-    else:
-        return render_template('search.html', title = "Search results", movies=results)
+    return render_template('search.html', title = "Search results", movies=results, user=session.get('usuario'))
 
 @app.route('/category', methods=['POST'])
 def category():
@@ -48,11 +45,9 @@ def category():
         if request.form.get('category') == movie['categoria']:
             results.append(movie)
             
-    if 'usuario' in session:
-        return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results, user=session['usuario'])
-    else:
-        return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results)
-
+    return render_template('category.html', category=request.form.get('category'), title = "Search results", movies=results, user=session.get('usuario'))
+    
+    
 @app.route('/login', methods=['POST'])
 def login():
     for dirs in os.listdir('usuarios/'):
