@@ -93,7 +93,6 @@ def register():
     if request.method == 'POST':
         user_path = 'usuarios/' + str(request.form.get('username'))
         try:
-            os.mkdir("NEPE")
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
             f.write(str(request.form.get('username')) + '\n')
