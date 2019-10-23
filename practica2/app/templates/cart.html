@@ -5,18 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    <div class="movie-list">
-        {% for movie in movies %}
+    
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    
+    {% if movies %}
+    {% for movie in movies %}
         <div class="item-carrito">
-            {{ movie.titulo }} - {{ movie.coste }}
-        </div><br />
-        {% endfor %}
-    </div>
-    <form action="{{ url_for('buy')}}" method="POST">
+            <p>{{ movie.titulo }} - {{ movie.precio }}</p>
+        </div>
+    {% endfor %}
+        <p>Precio total: {{ total }}</p>
+    <form action="{{ url_for('cart') }}" method="POST">
         {% if user %}
             <input class="butt_link" type="submit" value="Comprar">
         {% else %}
             <p>Not logged in, to buy movies please Login or <a href="{{ url_for('register') }}">Register</a></p>
+        {% endif %}
     </form>
+    {% else %}
+        <p>El carrito está vacío, compra algo y vuelve!</p>
+    {% endif %}
           
 {% endblock %}

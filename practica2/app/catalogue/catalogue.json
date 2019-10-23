@@ -5,7 +5,7 @@
 			"titulo": "Avatar",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 1877.99,
+      "precio": 12.99,
       "categoria": "Aventura",
       "año": 2000,
       "actores": 
@@ -25,7 +25,7 @@
 			"titulo": "Kill Bill",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 156.99,
+      "precio": 15.99,
       "categoria": "Horror",
       "año": 2003,
       "actores": 
@@ -41,7 +41,7 @@
 			"titulo": "Hateful Eight",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 138.99,
+      "precio": 13.99,
       "categoria": "Comedia",
       "año": 2014,
       "actores": 
@@ -57,7 +57,7 @@
 			"titulo": "Seven Samurai",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 118.99,
+      "precio": 11.99,
       "categoria": "Romance",
       "año": 2008,
       "actores": 
@@ -89,7 +89,7 @@
 			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
       "poster": "imagenes/guerraepisodio1.jpg",
       "director": "George Lucas",
-      "precio": 28.99,
+      "precio": 8.99,
       "categoria": "Comedia",
       "año": 1979,
       "actores": 

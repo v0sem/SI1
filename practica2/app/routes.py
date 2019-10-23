@@ -54,15 +54,15 @@ def details():
     catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
     catalogue = json.loads(catalogue_data)
 
-    id = request.form.get('id')
+    title = request.form.get('title')
 
     movie = None
     for m in catalogue['peliculas']:
-        if m['id'] == id:
+        if m['titulo'] == title:
             movie = m
             break
 
-    return render_template('movie_det.html', title=m.get('titulo'), movie=movie, user=session.get('usuario'))
+    return render_template('movie_det.html', movie=movie, user=session.get('usuario'))
 
 
 @app.route('/login', methods=['POST'])
@@ -126,14 +126,47 @@ def add_cart():
 
     try:
         session['cart'].append(result)
+        print("Hello1")
     except:
         session['cart'] = []
         session['cart'].append(result)
+        print("Hello1")
     
     session.modified = True
 
     return redirect(url_for('index'))
 
-@app.route('/get_cart', methods=['GET'])
-def get_cart():
-    return str(session['cart'])
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+    money_total = 0
+
+    if 'cart' in session:
+        for movie in session.get('cart'):
+            money_total += movie['precio'] 
+
+    prev_val = []
+
+    if request.method == 'POST':
+        valuser = session['usuario']
+        for dirs in os.listdir('usuarios/'):
+            if valuser == dirs:
+                f = open('usuarios/' + valuser + '/datos.dat', "r")
+                for i in range(0,4):
+                    prev_val.append(f.readline())
+                money = f.readline()
+                f.close()
+                money.strip()
+                if float(money) < money_total:
+                    flash('Not enough money')
+                    session['cart'] = []
+                    return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
+                else:
+                    f = open('usuarios/' + valuser + '/datos.dat', "w")
+                    for i in range(0,4):
+                        f.write(prev_val[i] + '\n')
+                    f.write(str(float(money) - money_total))
+                    session['cart'] = []
+                    f.close()
+                    return redirect(url_for('index'))
+
+    return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
