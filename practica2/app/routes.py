@@ -165,7 +165,7 @@ def cart():
                     try:
                         h_data = open('usuarios/' + valuser + '/historial.json', 'r').read()
                         data = json.loads(h_data)
-                    except FileNotFoundError:
+                    except (FileNotFoundError, json.decoder.JSONDecodeError):
                         open('usuarios/' + valuser + '/historial.json', 'w')
                         data = {}
                         data['compras'] = []
@@ -206,11 +206,13 @@ def historial():
             try:
                 historial = json.loads(historial_data)
             except json.decoder.JSONDecodeError:
-                historial = None
+                historial = {}
+                historial['compras'] = []
 
         else:
             historial_data = open(user_path + '/historial.json', 'w')
-            historial = None
+            historial = {}
+            historial['compras'] = []
 
         f = open(user_path + '/datos.dat', 'r')
         for i in range(0,4):
