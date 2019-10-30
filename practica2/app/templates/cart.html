@@ -13,10 +13,10 @@
         {% if movies %}
         {% for movie in movies %}
             <div class="item-carrito">
-                <p>{{ movie.titulo }} - {{ movie.precio }}</p>
+                <p>{{ movie.titulo }} - {{ movie.precio }}€</p>
             </div>
         {% endfor %}
-            <p>Precio total: {{ total }}</p>
+            <p>Precio total: {{ total }}€</p>
         <form action="{{ url_for('cart') }}" method="POST">
             {% if user %}
                 <input class="butt_link" type="submit" value="Comprar">

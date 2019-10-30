@@ -162,16 +162,26 @@ def cart():
                     return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
                 else:
                     f = open('usuarios/' + valuser + '/datos.dat', "w")
+                    try:
+                        h_data = open('usuarios/' + valuser + '/historial.json', 'r').read()
+                        data = json.loads(h_data)
+                    except FileNotFoundError:
+                        open('usuarios/' + valuser + '/historial.json', 'w')
+                        data = {}
+                        data['compras'] = []
+
                     cart = session.get('cart')
-                    data = {}
+                    
                     peliculas = []
-                    data['compras'] = []
                     for movie in cart:
-                        peliculas.append('"title": ' + movie['titulo'] + '\nvalor": ' + str(movie['precio']))
+                        peliculas.append({
+                            'title': movie['titulo'],
+                            'valor': movie['precio']
+                        })
                     
                     data['compras'].append({
                         'peliculas': peliculas,
-                        'fecha': str(datetime.datetime.now())
+                        'fecha': str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                     })
                     with open('usuarios/' + valuser + '/historial.json', 'w') as outfile:
                         json.dump(data, outfile)
@@ -185,28 +195,45 @@ def cart():
     return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
 
 
-@app.route('/historial', methods=['GET'])
+@app.route('/historial', methods=['GET', 'POST'])
 def historial():
-    user = session.get('usuario')
-    user_path = 'usuarios/' + str(user)
+    if request.method == 'GET':
+        user = session.get('usuario')
+        user_path = 'usuarios/' + str(user)
 
-    if 'historial.json' in os.listdir(user_path):
-        historial_data = open(user_path + '/historial.json', 'r').read()
-        try:
-            historial = json.loads(historial_data)
-        except json.decoder.JSONDecodeError:
+        if 'historial.json' in os.listdir(user_path):
+            historial_data = open(user_path + '/historial.json', 'r').read()
+            try:
+                historial = json.loads(historial_data)
+            except json.decoder.JSONDecodeError:
+                historial = None
+
+        else:
+            historial_data = open(user_path + '/historial.json', 'w')
             historial = None
 
-    else:
-        historial_data = open(user_path + '/historial.json', 'w')
-        historial = None
-
-    f = open(user_path + '/datos.dat', 'r')
-    for i in range(0,8):
-        f.readline(i)
-    money = f.readline()
-    f.close()
-    money.strip()
+        f = open(user_path + '/datos.dat', 'r')
+        for i in range(0,4):
+            f.readline()
+        money = f.readline()
+        f.close()
+        money.strip()
     
-    return render_template('historial.html', historial=historial, money=money, title='Historial', user=session.get('usuario'))
+    else:
+        prev_val = []
+        f = open('usuarios/' + session.get('usuario') + '/datos.dat', "r")
+        for i in range(0,4):
+            prev_val.append(f.readline())
+        money = f.readline()
+        f.close()
+        money.strip()
+
+        f = open('usuarios/' + session.get('usuario') + '/datos.dat', "w")
+        for i in range(0,4):
+            f.write(prev_val[i])    
+        f.write(str(float(money) + float(request.form.get('dinero'))))
+        f.close()
+        return redirect(url_for('historial'))
+
+    return render_template('historial.html', historial=historial['compras'], money=money, title='Historial', user=session.get('usuario'))
 

@@ -92,7 +92,7 @@
                     <div class="sepparator"></div>
                     <form action="/search" method="post" novalidate>
                         <input name="search_content" type="text" class="searchbar">
-                        <input type="submit" value="Search">
+                        <input class="search" type="submit" value="Search">
                     </form>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                 <br/><br/>
             </form>
 
-            <button type="submit" form='regform'>Submit</button>
+            <button type="submit" form='regform'>Log In</button>
             <a href="{{ url_for('register') }}">Register</a>
             {% endif %}
         </div>
