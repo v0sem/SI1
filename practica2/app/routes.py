@@ -93,6 +93,13 @@ def logout():
 def register():
     if request.method == 'POST':
         user_path = 'usuarios/' + str(request.form.get('username'))
+
+        # Create folder for users
+        try:
+            os.mkdir('usuarios/')
+        except:
+            pass
+        
         try:
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
