@@ -133,11 +133,9 @@ def add_cart():
 
     try:
         session['cart'].append(result)
-        print("Hello1")
     except:
         session['cart'] = []
         session['cart'].append(result)
-        print("Hello1")
     
     session.modified = True
 
@@ -244,3 +242,7 @@ def historial():
 
     return render_template('historial.html', historial=historial['compras'], money=money, title='Historial', user=session.get('usuario'))
 
+
+@app.route('/increment', methods=['GET', 'POST'])
+def increment():
+    return str(random.randint(1, 100))

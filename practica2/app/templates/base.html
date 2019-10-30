@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='estilo.css') }}>
     <title>PelisChulas - {% block title %} {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src={{ url_for('static', filename='main.js') }}></script>
 </head>
 
 <body>
@@ -23,6 +25,16 @@
 
         <!-- Navigation bar -->
         <div class="navbar">
+            <!-- Current users -->
+            <div class="nav-element">
+                <a class="butt_link" href="{{ url_for('index') }}">
+                    <div class=butt>
+                        <p>Current users: </p>
+                        <p id="current">0</p>
+                    </div>
+                </a>
+            </div>
+
             <!-- Home -->
             <div class="nav-element">
                 <a class="butt_link" href="{{ url_for('index') }}">
