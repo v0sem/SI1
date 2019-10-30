@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+    {% if historial %}
+        {% for compra in historial %}
+            <label>Compra de: {{ compra.fecha }}</label>
+            <ul>
+            {% for pelicula in compra.peliculas %}
+                <li>{{ pelicula.title }} - {{ pelicula.valor }}</li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No hay compras</p>
+    {% endif %}
+{% endblock %}

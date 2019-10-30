@@ -8,6 +8,7 @@ import os
 import sys
 from hashlib import md5
 import random
+import datetime
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -93,7 +94,6 @@ def register():
     if request.method == 'POST':
         user_path = 'usuarios/' + str(request.form.get('username'))
         try:
-            os.mkdir("NEPE")
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
             f.write(str(request.form.get('username')) + '\n')
@@ -162,11 +162,51 @@ def cart():
                     return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
                 else:
                     f = open('usuarios/' + valuser + '/datos.dat', "w")
+                    cart = session.get('cart')
+                    data = {}
+                    peliculas = []
+                    data['compras'] = []
+                    for movie in cart:
+                        peliculas.append('"title": ' + movie['titulo'] + '\nvalor": ' + str(movie['precio']))
+                    
+                    data['compras'].append({
+                        'peliculas': peliculas,
+                        'fecha': str(datetime.datetime.now())
+                    })
+                    with open('usuarios/' + valuser + '/historial.json', 'w') as outfile:
+                        json.dump(data, outfile)
                     for i in range(0,4):
-                        f.write(prev_val[i] + '\n')
+                        f.write(prev_val[i])
                     f.write(str(float(money) - money_total))
                     session['cart'] = []
                     f.close()
                     return redirect(url_for('index'))
 
     return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
+
+
+@app.route('/historial', methods=['GET'])
+def historial():
+    user = session.get('usuario')
+    user_path = 'usuarios/' + str(user)
+
+    if 'historial.json' in os.listdir(user_path):
+        historial_data = open(user_path + '/historial.json', 'r').read()
+        try:
+            historial = json.loads(historial_data)
+        except json.decoder.JSONDecodeError:
+            historial = None
+
+    else:
+        historial_data = open(user_path + '/historial.json', 'w')
+        historial = None
+
+    f = open(user_path + '/datos.dat', 'r')
+    for i in range(0,8):
+        f.readline(i)
+    money = f.readline()
+    f.close()
+    money.strip()
+    
+    return render_template('historial.html', historial=historial, money=money, title='Historial', user=session.get('usuario'))
+
