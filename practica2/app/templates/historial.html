@@ -8,12 +8,15 @@
     {% if historial %}
         <br/>
         {% for compra in historial %}
-            <label>Compra de: {{ compra.fecha }}</label>
-            <ul>
-            {% for pelicula in compra.peliculas %}
-                <li>{{ pelicula.title }} - {{ pelicula.valor }}€</li>
-            {% endfor %}
-            </ul>
+            <a onclick='desplegar("{{ compra.fecha }}")'>Compra de: {{ compra.fecha }}</a>
+            <div id='div_{{ compra.fecha }}'>
+                <ul>
+                {% for pelicula in compra.peliculas %}
+                    <li>{{ pelicula.title }} - {{ pelicula.valor }}€</li>
+                {% endfor %}
+                </ul>
+            </div>
+            <br>
         {% endfor %}
     {% else %}
         <p>No hay compras</p>

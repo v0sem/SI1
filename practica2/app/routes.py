@@ -93,6 +93,13 @@ def logout():
 def register():
     if request.method == 'POST':
         user_path = 'usuarios/' + str(request.form.get('username'))
+
+        # Create folder for users
+        try:
+            os.mkdir('usuarios/')
+        except:
+            pass
+        
         try:
             os.mkdir(user_path)
             f = open(user_path + '/datos.dat', "w")
@@ -126,11 +133,9 @@ def add_cart():
 
     try:
         session['cart'].append(result)
-        print("Hello1")
     except:
         session['cart'] = []
         session['cart'].append(result)
-        print("Hello1")
     
     session.modified = True
 
@@ -239,3 +244,7 @@ def historial():
 
     return render_template('historial.html', historial=historial['compras'], money=money, title='Historial', user=session.get('usuario'))
 
+
+@app.route('/increment', methods=['GET', 'POST'])
+def increment():
+    return str(random.randint(1, 100))

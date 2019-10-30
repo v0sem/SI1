@@ -20,7 +20,8 @@
             <input type="number" min="600000000" max="799999999" placeholder="Enter phone" id="phone">
             <br/><br/>
             <label for="password">Password:<br/></label>
-            <input type="password" placeholder="Enter Password" id="password" name="password" required>
+            <input type="password" placeholder="Enter Password" id="password" name="password" onKeyUp="check_pass(this)" required>
+            <p id="anal">No password yet</p>
             <br><br>
             <label for="card-type">Credit card type:<br/></label>
             <select id="card-type">
