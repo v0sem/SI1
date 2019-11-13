@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block content %}
+    <h1 class="result-title">Resultados de la busqueda:</h1>
+    <div class="movie-list">
+        {% for movie in movies %}
+        <div class="movie">
+            <form action="{{ url_for('details') }}" method="post" novalidate>
+                <button type="submit" class="butt_link">
+                    <input type="hidden" name="title" value="{{ movie.titulo }}">
+                    <img src={{ url_for('static', filename='images/movie' + movie.id|string + '.jpg' )}} alt="Piratas del caribe">
+                    <h4>{{ movie.titulo }}</h4>
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

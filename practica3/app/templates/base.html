@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='estilo.css') }}>
+    <title>PelisChulas - {% block title %} {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src={{ url_for('static', filename='main.js') }}></script>
+</head>
+
+<body>
+    <!-- Header with title and subtitle -->
+    <header>
+        <div class="header-link-div">
+            <a href="{{ url_for('index') }}" id="header-link">
+                <img src={{ url_for('static', filename='images/logo.svg') }} alt="Jolly Rogers" id="header-logo">
+
+                <div class="header-bunch">
+                    <h1 id="header-title">PelisChulas.com</h1>
+                    <p id="header-subtitle">Las pelis mas chulas de la interweb</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Navigation bar -->
+        <div class="navbar">
+            <!-- Current users -->
+            <div class="nav-element">
+                <a class="butt_link" href="{{ url_for('index') }}">
+                    <div class=butt>
+                        <p>Current users: </p>
+                        <p id="current">0</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Home -->
+            <div class="nav-element">
+                <a class="butt_link" href="{{ url_for('index') }}">
+                    <div class=butt>
+                        <img src={{ url_for('static', filename='images/home.svg') }} alt="Home icon">
+                        <div class="sepparator"></div>
+                        <p>Home</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Display categories -->
+            <div class="dropdown-menu">
+                <div class="nav-element-menu">
+                    <a class="butt_link_menu" href="#">
+                        <div class=butt>
+                            <img src={{ url_for('static', filename='images/tag.svg') }} alt="Home icon">
+                            <div class="sepparator"></div>
+                            <p>Categories</p>
+                        </div>
+                    </a>
+                </div>
+                <div id="dropdown">
+                    <div class="nav-element">
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Horror">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/moon.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Horror</p>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="nav-element">
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Romance">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/heart.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Romance</p>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="nav-element">
+                        <form action="/category" method="post" novalidate>
+                            <button type="submit" class="butt_link">
+                                <input type="hidden" name="category" value="Comedia">
+                                <div class=butt>
+                                    <img src={{ url_for('static', filename='images/smile.svg') }} alt="User icon">
+                                    <div class="sepparator"></div>
+                                    <p>Comedy</p>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search bar -->
+            <div class="nav-element">
+                <div class=butt>
+                    <img src={{ url_for('static', filename='images/search.svg') }} alt="Search icon">
+                    <div class="sepparator"></div>
+                    <form action="/search" method="post" novalidate>
+                        <input name="search_content" type="text" class="searchbar">
+                        <input class="search" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+
+            <!-- Shopping cart -->
+            <div class="nav-element">
+                <a class="butt_link" href="{{ url_for('cart') }}">
+                    <div class=butt>
+                        <img src={{ url_for('static', filename='images/shopping-cart.svg') }} alt="Cart icon">
+                        <div class="sepparator"></div>
+                        <p>Cart</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Main flex container -->
+    <div class="main">
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            {% if user %}
+                <h3>Hello: {{ user }}</h3>
+                <br/>
+                <a href="{{ url_for('logout') }}">Log Out</a><br/><br/><br/>
+                <a href="{{ url_for('historial') }}">Historial de compras</a>
+            {% else %}
+            <h3>Hello: Guest</h3>
+            <form id="regform" action="{{ url_for('login') }}" method="POST">
+                <label for="username" class="register-label">Username:<br/></label>
+                <input type="text" placeholder="Username" name="username" id="username" required>
+                <br/><br/>
+                <label for="password" class="register-label">Password:<br/></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+                <br/><br/>
+            </form>
+
+            <button type="submit" form='regform'>Log In</button>
+            <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer with copyright and other data -->
+    <footer>
+        Web licenced under public domain
+    </footer>
+</body>
+
+</html>

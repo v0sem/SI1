@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    <div class="content-margin">
+        <form action="{{ url_for('register') }}" method="POST">
+            <label for="username">Username:<br/></label>
+            <input type="text" placeholder="Username" id="username" name="username" required>
+            <br/><br/>
+            <label for="email">Email:<br/></label>
+            <input type="email" placeholder="Enter Email" id="email" name="email" required>
+            <br/><br/>
+            <label for="phone">Phone:<br/></label>
+            <input type="number" min="600000000" max="799999999" placeholder="Enter phone" id="phone">
+            <br/><br/>
+            <label for="password">Password:<br/></label>
+            <input type="password" placeholder="Enter Password" id="password" name="password" onKeyUp="check_pass(this)" required>
+            <p id="anal">No password yet</p>
+            <br><br>
+            <label for="card-type">Credit card type:<br/></label>
+            <select id="card-type">
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="paypal">Paypal</option>
+                </select>
+            <br><br>
+            <label for="card">Credit card:<br/></label>
+            <input type="text" placeholder="Enter credit card" id="card" name="ccnumber"required>
+            <br><br>
+            <label for="card_year">Expiration Date:<br/></label>
+            <input type="number" min="1" max="12" placeholder="Month" name="card_month">
+            <input type="number" min="2019" max="2050" placeholder="Year" id="card_year">
+            <br><br>
+            <input type="submit" value="Submit"></input>
+        </form>
+    </div>
+{% endblock %}
