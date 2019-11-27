@@ -25,6 +25,7 @@ def register(email, password, firstname=None, lastname=None, address1=None, addr
         db_conn=db_engine.connect()
 
         ins = insert(db_user, values=[{
+            'customerid':db_conn.execute("SELECT max(customerid) FROM customers").fetchone()[0] + 1,
             'firstname':firstname,
             'lastname':lastname,
             'address1':address1,
@@ -58,3 +59,21 @@ def register(email, password, firstname=None, lastname=None, address1=None, addr
         return 'Something is broken'
     
     return
+
+def authenticate(email, password):
+
+    try:
+        db_conn=None
+        db_conn=db_engine.connect()
+        user = db_conn.execute("SELECT username FROM customers WHERE email=%s AND password=%s", (email, password))
+        name = list(user)[0][0]
+    except:
+        if db_conn is not None:
+            db_conn.close()
+        print("Exception in DB access:")
+        print("-"*60)
+        traceback.print_exc(file=sys.stderr)
+        print("-"*60)
+
+        return 'Something is broken'
+    return name

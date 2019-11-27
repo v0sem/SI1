@@ -57,3 +57,14 @@ CREATE TABLE alertas(
     orderid INTEGER, 
     CONSTRAINT order_alertas FOREIGN KEY (orderid) REFERENCES public.orders (orderid)
     );
+
+ALTER TABLE customers
+ALTER COLUMN firstname DROP NOT NULL,
+ALTER COLUMN lastname DROP NOT NULL,
+ALTER COLUMN address1 DROP NOT NULL,
+ALTER COLUMN city DROP NOT NULL,
+ALTER COLUMN country DROP NOT NULL,
+ALTER COLUMN region DROP NOT NULL,
+ALTER COLUMN creditcardtype DROP NOT NULL,
+ALTER COLUMN creditcardexpiration DROP NOT NULL,
+ADD CONSTRAINT email_uniq UNIQUE (email);

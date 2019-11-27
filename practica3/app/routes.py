@@ -70,17 +70,11 @@ def details():
 
 @app.route('/login', methods=['POST'])
 def login():
-    for dirs in os.listdir('usuarios/'):
-        if str(request.form.get('username')) == dirs:
-            f = open('usuarios/' + dirs + '/datos.dat')
-            valuser = f.readline()
-            valpass = f.readline()
-            f.close()
-            valpass = valpass.strip()
-            if md5(str(request.form.get('password')).encode()).hexdigest() == valpass:
-                session['usuario'] = valuser.strip()
-                session.modified=True
-            break
+    user = database.authenticate(request.form.get('email'), request.form.get('password'))
+    if user != 'Something is broken':
+        session['usuario'] = user
+        session.modified=True
+            
 
     return redirect(url_for('index'))
 
@@ -94,18 +88,17 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        user_path = 'usuarios/' + str(request.form.get('username'))
 
         # Create folder for users
         try:
             os.mkdir('usuarios/')
         except:
             pass
-        
+
         if database.register(request.form.get('email'), request.form.get('password'), username=request.form.get('username'),
                                 creditcard=request.form.get('ccnumber')) == 'Something is broken':
             print (request.referrer, file=sys.stderr)
-            flash('Name is already taken')
+            flash('Email already in use')
             session.modified=True
             return redirect(url_for('register'))
     return render_template('register.html', title="Register")
