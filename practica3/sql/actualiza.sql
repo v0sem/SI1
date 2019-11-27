@@ -48,3 +48,12 @@ WHERE orderid IN(
     FROM orders
     WHERE NOT EXISTS(SELECT NULL FROM orderdetail WHERE orderdetail.orderid = orders.orderid)
     );
+
+DELETE FROM inventory
+WHERE stock<0;
+
+CREATE TABLE alertas(
+    alertaid SERIAL PRIMARY KEY,
+    orderid INTEGER, 
+    CONSTRAINT order_alertas FOREIGN KEY (orderid) REFERENCES public.orders (orderid)
+    );

@@ -9,6 +9,8 @@ import sys
 from hashlib import md5
 import random
 import datetime
+from app import app
+from app import database
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -100,17 +102,8 @@ def register():
         except:
             pass
         
-        try:
-            os.mkdir(user_path)
-            f = open(user_path + '/datos.dat', "w")
-            f.write(str(request.form.get('username')) + '\n')
-            f.write(md5(str(request.form.get('password')).encode()).hexdigest() + '\n')
-            f.write(str(request.form.get('email')) + '\n')
-            f.write(str(request.form.get('ccnumber')) + '\n')
-            f.write(str(random.randint(0,100)))
-            f.close()
-            return redirect(url_for('index'))
-        except FileExistsError:
+        if database.register(request.form.get('email'), request.form.get('password'), username=request.form.get('username'),
+                                creditcard=request.form.get('ccnumber')) == 'Something is broken':
             print (request.referrer, file=sys.stderr)
             flash('Name is already taken')
             session.modified=True
