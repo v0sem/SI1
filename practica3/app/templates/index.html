@@ -5,6 +5,11 @@
 {% endblock%}
 
 {% block content %}
+<br>
+&nbsp;&nbsp;Top ventas ultimos 3 años de estreno:
+    {% for venta in top %}
+        {{venta[0]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% endfor %}
     <div class="movie-list">
         {% for movie in movies %}
         <div class="movie">

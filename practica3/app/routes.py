@@ -16,10 +16,11 @@ from app import database
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     print (url_for('static', filename='estilo.css'), file=sys.stderr)
+    top = database.topventas()
     catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
     catalogue = json.loads(catalogue_data)
 
-    return render_template('index.html', title = "Home", movies=catalogue['peliculas'], user=session.get('usuario'))
+    return render_template('index.html', title = "Home", movies=catalogue['peliculas'], top=top, user=session.get('usuario'))
 
 
 @app.route('/search', methods=['POST'])
