@@ -89,8 +89,8 @@ def authenticate(email, password):
 def newcarrito():
     try:
         db_conn=db_engine.connect()
-        db_conn.execute("INSERT INTO orders (orderdate, netamount, tax, totalamount) values(CURRENT_DATE,0,0,0)")
-        res = db_conn.execute("SELECT setval('orders:orderid_seq', (SELECT max(orderid) FROM orders))")
+        db_conn.execute("INSERT INTO orders (orderid, orderdate, netamount, tax, totalamount) values((SELECT max(orderid) FROM orders) + 1,CURRENT_DATE,0,0,0)")
+        res = db_conn.execute("SELECT max(orderid) FROM orders")
     except:
         if db_conn is not None:
             db_conn.close()
@@ -105,8 +105,9 @@ def newcarrito():
 def getcarrito(orderid):
     try:
         db_conn=db_engine.connect()
-        res = db_conn.execute("SELECT (movietitle, products.price) FROM orderdetail NATURAL JOIN products NATURAL JOIN imdb_movies USING movieid WHERE orderid=%s", 
-                                (orderid))
+        print("helloo", orderid)
+        res = db_conn.execute("SELECT movietitle, orderdetail.price, quantity, orderdetail.prod_id FROM orderdetail INNER JOIN products ON orderdetail.prod_id=products.prod_id INNER JOIN imdb_movies ON products.movieid=imdb_movies.movieid WHERE orderid=%s", 
+                                (str(orderid)))
     except:
         if db_conn is not None:
             db_conn.close()
@@ -120,9 +121,50 @@ def getcarrito(orderid):
 
 def orderdetail(prodid, orderid):
     try:
+        print("hello", orderid)
         db_conn=db_engine.connect()
-        db_conn.execute("INSERT INTO orderdetail (orderid, prod_id, price, quantity) values(%s,%s,(SELECT price FROM products WHERE prod_id=%s),1)", 
+        check = db_conn.execute("SELECT quantity FROm orderdetail WHERE orderid=%s AND prod_id=%s",
+                                (str(orderid), str(prodid)))
+        lista = list(check)
+        quant = len(lista)
+        print(quant)
+        if quant == 0:
+            db_conn.execute("INSERT INTO orderdetail (orderid, prod_id, price, quantity) values(%s,%s,(SELECT price FROM products WHERE prod_id=%s),1)", 
                         (str(orderid), str(prodid), str(prodid)))
+        else:
+            price = db_conn.execute("SELECT price FROM products WHERE prod_id=%s", (str(prodid)))
+            db_conn.execute("UPDATE orderdetail SET quantity=%s, price=%s WHERE orderid=%s AND prod_id=%s",
+                            (str(lista[0][0] + 1), str(list(price)[0][0] * (lista[0][0] + 1)), str(orderid), str(prodid)))
+    except:
+        if db_conn is not None:
+            db_conn.close()
+        print("Exception in DB access:")
+        print("-"*60)
+        traceback.print_exc(file=sys.stderr)
+        print("-"*60)
+
+        return 'Something is broken'
+    return
+
+def comprar(orderid):
+    try:
+        db_conn=db_engine.connect()
+        db_conn.execute("UPDATE orders SET status='Paid' WHERE orderid=%s", (str(orderid)))
+    except:
+        if db_conn is not None:
+            db_conn.close()
+        print("Exception in DB access:")
+        print("-"*60)
+        traceback.print_exc(file=sys.stderr)
+        print("-"*60)
+
+        return 'Something is broken'
+    return
+
+def deleteorderdet(prodid, orderid):
+    try:
+        db_conn=db_engine.connect()
+        db_conn.execute("DELETE FROM orderdetail WHERE orderid=%s AND prod_id=%s", (str(orderid), str(prodid)))
     except:
         if db_conn is not None:
             db_conn.close()

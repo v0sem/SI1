@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if compra %}
+        <p>Compra realizada con éxito!</p>
+    {% else %}
     <div class="details">
         {% for message in get_flashed_messages() %}
             <p>{{ message }}</p>
@@ -12,9 +15,13 @@
         
         {% if movies %}
         {% for movie in movies %}
+        <form action="{{ url_for('delete') }}" method="POST">
             <div class="item-carrito">
-                <p>{{ movie.titulo }} - {{ movie.precio }}€</p>
+                {{ movie.cantidad }} - {{ movie.precio }}€ - {{ movie.titulo }}
+                <input type="text" name="prod_id" value="{{ movie.prodid }}" hidden>
+                <input type="submit" value="Eliminar del carrito">
             </div>
+        </form>
         {% endfor %}
             <p>Precio total: {{ total }}€</p>
         <form action="{{ url_for('cart') }}" method="POST">
@@ -28,5 +35,5 @@
             <p>El carrito está vacío, compra algo y vuelve!</p>
         {% endif %}
     </div>
-        
+    {% endif %}
 {% endblock %}

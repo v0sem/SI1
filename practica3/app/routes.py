@@ -74,8 +74,7 @@ def login():
     user = database.authenticate(request.form.get('email'), request.form.get('password'))
     if user != 'Something is broken':
         session['usuario'] = user
-        session.modified=True
-            
+        session.modified=True         
 
     return redirect(url_for('index'))
 
@@ -90,12 +89,6 @@ def logout():
 def register():
     if request.method == 'POST':
 
-        # Create folder for users
-        try:
-            os.mkdir('usuarios/')
-        except:
-            pass
-
         if database.register(request.form.get('email'), request.form.get('password'), username=request.form.get('username'),
                                 creditcard=request.form.get('ccnumber')) == 'Something is broken':
             print (request.referrer, file=sys.stderr)
@@ -105,86 +98,47 @@ def register():
     return render_template('register.html', title="Register")
 
 @app.route('/add_cart', methods=['POST'])
-def add_cart():
-    catalogue_data = open(os.path.join(app.root_path,'catalogue/catalogue.json'), encoding="utf-8").read()
-    catalogue = json.loads(catalogue_data)
-                
+def add_cart(): 
     pelicula = request.form.get('id')
 
-    result = None
-    for movie in catalogue['peliculas']:
-        print(str(movie['id']) + ' > ' + str(pelicula))
-        if int(movie['id']) == int(pelicula):
-            result = movie
-            break
+    if 'cart' not in session:
+        session['cart'] = database.newcarrito()
+        return redirect(url_for('index'))
 
-    try:
-        session['cart'].append(result)
-    except:
-        session['cart'] = []
-        session['cart'].append(result)
-    
+    database.orderdetail(pelicula, session['cart'])
     session.modified = True
 
     return redirect(url_for('index'))
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
-    money_total = 0
 
-    if 'cart' in session:
-        for movie in session.get('cart'):
-            money_total += movie['precio'] 
+    if 'cart' not in session or session['cart'] == 'Something is broken':
+        session['cart'] = database.newcarrito()
 
-    prev_val = []
+    comprado=False
+    movies=[]
+    money_total=0
+    print(session.get('cart'))
+
+    for t in database.getcarrito(session['cart']):
+        movies.append(
+            {
+                'titulo': t[0],
+                'precio': t[1],
+                'cantidad': t[2],
+                'prodid': t[3],
+            }
+        )
+        money_total += t[1]
 
     if request.method == 'POST':
-        valuser = session['usuario']
-        for dirs in os.listdir('usuarios/'):
-            if valuser == dirs:
-                f = open('usuarios/' + valuser + '/datos.dat', "r")
-                for i in range(0,4):
-                    prev_val.append(f.readline())
-                money = f.readline()
-                f.close()
-                money.strip()
-                if float(money) < money_total:
-                    flash('Not enough money')
-                    session['cart'] = []
-                    return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
-                else:
-                    f = open('usuarios/' + valuser + '/datos.dat', "w")
-                    try:
-                        h_data = open('usuarios/' + valuser + '/historial.json', 'r').read()
-                        data = json.loads(h_data)
-                    except (FileNotFoundError, json.decoder.JSONDecodeError):
-                        open('usuarios/' + valuser + '/historial.json', 'w')
-                        data = {}
-                        data['compras'] = []
+        if database.comprar(session['cart']) != 'Something is broken':
+            session['cart'] = database.newcarrito()
+            comprado=True
+        flash('Algo ha ido mal, vuelve a intentar')
 
-                    cart = session.get('cart')
-                    
-                    peliculas = []
-                    for movie in cart:
-                        peliculas.append({
-                            'title': movie['titulo'],
-                            'valor': movie['precio']
-                        })
-                    
-                    data['compras'].append({
-                        'peliculas': peliculas,
-                        'fecha': str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                    })
-                    with open('usuarios/' + valuser + '/historial.json', 'w') as outfile:
-                        json.dump(data, outfile)
-                    for i in range(0,4):
-                        f.write(prev_val[i])
-                    f.write(str(float(money) - money_total))
-                    session['cart'] = []
-                    f.close()
-                    return redirect(url_for('index'))
-
-    return render_template('cart.html', title="Checkout", total=money_total, movies=session.get('cart'), user=session.get('usuario'))
+    return render_template('cart.html', compra=comprado, title="Checkout", total=money_total, movies=movies, user=session.get('usuario'))
 
 
 @app.route('/historial', methods=['GET', 'POST'])
@@ -235,3 +189,12 @@ def historial():
 @app.route('/increment', methods=['GET', 'POST'])
 def increment():
     return str(random.randint(1, 100))
+
+@app.route('/delete', methods=['POST',])
+def delete():
+    orderid = session.get('cart')
+    prodid = request.form.get('prod_id')
+
+    database.deleteorderdet(prodid, orderid)
+
+    return redirect(url_for('cart'))
