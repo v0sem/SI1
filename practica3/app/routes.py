@@ -73,7 +73,8 @@ def details():
 def login():
     user = database.authenticate(request.form.get('email'), request.form.get('password'))
     if user != 'Something is broken':
-        session['usuario'] = user
+        session['usuario'] = user[0]
+        session['custid'] = user[1]
         session.modified=True         
 
     return redirect(url_for('index'))
@@ -133,7 +134,7 @@ def cart():
         money_total += t[1]
 
     if request.method == 'POST':
-        if database.comprar(session['cart']) != 'Something is broken':
+        if database.comprar(session['cart'], session['custid']) != 'Something is broken':
             session['cart'] = database.newcarrito()
             comprado=True
         flash('Algo ha ido mal, vuelve a intentar')

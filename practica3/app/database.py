@@ -73,8 +73,8 @@ def authenticate(email, password):
     try:
         db_conn=None
         db_conn=db_engine.connect()
-        user = db_conn.execute("SELECT username FROM customers WHERE email=%s AND password=%s", (email, password))
-        name = list(user)[0][0]
+        user = db_conn.execute("SELECT username, customerid FROM customers WHERE email=%s AND password=%s", (email, password))
+        name = list(user)[0]
     except:
         if db_conn is not None:
             db_conn.close()
@@ -89,7 +89,7 @@ def authenticate(email, password):
 def newcarrito():
     try:
         db_conn=db_engine.connect()
-        db_conn.execute("INSERT INTO orders (orderid, orderdate, netamount, tax, totalamount) values((SELECT max(orderid) FROM orders) + 1,CURRENT_DATE,0,0,0)")
+        db_conn.execute("INSERT INTO orders (orderid, orderdate, customerid, netamount, tax, totalamount) values((SELECT max(orderid) FROM orders) + 1,CURRENT_DATE, %s,0,0,0)")
         res = db_conn.execute("SELECT max(orderid) FROM orders")
     except:
         if db_conn is not None:
@@ -146,10 +146,10 @@ def orderdetail(prodid, orderid):
         return 'Something is broken'
     return
 
-def comprar(orderid):
+def comprar(orderid, custid):
     try:
         db_conn=db_engine.connect()
-        db_conn.execute("UPDATE orders SET status='Paid' WHERE orderid=%s", (str(orderid)))
+        db_conn.execute("UPDATE orders SET status='Paid', customerid=%s WHERE orderid=%s", (str(custid), str(orderid)))
     except:
         if db_conn is not None:
             db_conn.close()

@@ -96,7 +96,8 @@ def getCustomer(username, password):
         return {'firstname': res['firstname'], 'lastname': res['lastname']}
     
 def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
-    
+
+    db_conn = db_engine.connect()
     # Array de trazas a mostrar en la página
     dbr=[]
 
@@ -106,19 +107,82 @@ def delCustomer(customerid, bFallo, bSQL, duerme, bCommit):
     # - usar sentencias SQL ('BEGIN', 'COMMIT', ...) si bSQL es True
     # - suspender la ejecución 'duerme' segundos en el punto adecuado para forzar deadlock
     # - ir guardando trazas mediante dbr.append()
+    if bFallo:
+        append1 = 'Borrando de orderdetail'
+        consulta1 = "DELETE FROM orderdetail WHERE orderid IN( SELECT orderid FROM orders WHERE \
+            customerid = {})".format(customerid)
+        append3 = 'Borrando de orders'
+        consulta3 = "DELETE FROM orders WHERE customerid = {}".format(customerid)
+        append2 = 'Borrando de customers'
+        consulta2 = "DELETE FROM customers WHERE customerid = {}".format(customerid)
+    else:
+        append1 = 'Borrando de orderdetail'
+        consulta1 = "DELETE FROM orderdetail WHERE orderid IN( SELECT orderid FROM orders WHERE \
+            customerid = {})".format(customerid)
+        append2 = 'Borrando de orders'
+        consulta2 = "DELETE FROM orders WHERE customerid = {}".format(customerid)
+        append3 = 'Borrando de customers'
+        consulta3 = "DELETE FROM customers WHERE customerid = {}".format(customerid)
     
+    time.sleep(duerme)
+
+
     try:
         # TODO: ejecutar consultas
-        pass
+        if bSQL:
+            db_conn.execute('BEGIN;')
+            dbr.append(append1)
+            db_conn.execute(consulta1)
+            if bCommit:
+                dbr.append('Commit intermedio')
+                db_conn.execute('COMMIT;')
+                db_conn.execute('BEGIN;')
+            dbr.append(append2)
+            db_conn.execute(consulta2)
+            dbr.append(append3)
+            db_conn.execute(consulta3)
+        else:
+            ts = db_conn.begin()
+            dbr.append(append1)
+            db_conn.execute(consulta1)
+            if bCommit:
+                dbr.append('Commit intermedio')
+                ts.commit()
+                ts = db_conn.begin()
+            dbr.append(append2)
+            db_conn.execute(consulta2)
+            dbr.append(append3)
+            db_conn.execute(consulta3)
+
 
     except Exception as e:
         # TODO: deshacer en caso de error
-        pass
+        dbr.append(str(e))
+        dbr.append('Haciendo rollback')
+
+        if bSQL:
+            db_conn.execute('ROLLBACK;')
+        else:
+            ts.rollback()
+        
+        dbr.append('Operación cancelada, usuario se mantiene')
+
+        orders = list(db_conn.execute('SELECT * FROM orderdetail WHERE orderid IN( SELECT orderid FROM orders WHERE customerid = ' + str(customerid) + ') LIMIT 5;'))
+        dbr.append('Algunos orderdetails:')
+        if len(orders) == 0:
+            dbr.append('No hay detalles')
+        else:
+            for o in orders:
+                dbr.append(o)
 
     else:
         # TODO: confirmar cambios si todo va bien
-        pass
-
-        
+        dbr.append('Todo bien, commit')
+        if bSQL:
+            db_conn.execute('COMMIT;')
+        else:
+            ts.commit()
+    
+    db_conn.close()
     return dbr
 
